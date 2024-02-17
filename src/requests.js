@@ -9,3 +9,9 @@ export const getAll = () => {
 export const createAnecdote = (newAnecdote) => {
   return axios.post(baseUrl, newAnecdote).then((res) => res.data);
 };
+
+export const updateAnecdote = (updatedAnecdote) => {
+  return axios
+    .put(`${baseUrl}/${updatedAnecdote.id}`, updatedAnecdote)
+    .then((res) => res.data);
+};
