@@ -40,7 +40,10 @@ const App = () => {
   const handleVote = (anecdote) => {
     updateAnecdoteMutation.mutate({ ...anecdote, votes: anecdote.votes + 1 });
     console.log(anecdote);
-    dispatch({ type: "INFO", payload: "YOU HAVE VOTED" });
+    dispatch({
+      type: "INFO",
+      payload: `You have voted for "${anecdote.content}"`,
+    });
     resetNotif();
   };
 
