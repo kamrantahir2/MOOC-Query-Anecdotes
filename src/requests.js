@@ -7,7 +7,11 @@ export const getAll = () => {
 };
 
 export const createAnecdote = (newAnecdote) => {
-  return axios.post(baseUrl, newAnecdote).then((res) => res.data);
+  try {
+    return axios.post(baseUrl, newAnecdote).then((res) => res.data);
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const updateAnecdote = (updatedAnecdote) => {
