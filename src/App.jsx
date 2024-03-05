@@ -3,9 +3,17 @@ import AnecdoteForm from "./components/AnecdoteForm";
 import Notification from "./components/Notification";
 import { getAll, updateAnecdote } from "./requests";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNotificationDispatch } from "./components/NotificationContext";
 
 const App = () => {
   const queryClient = useQueryClient();
+  const dispatch = useNotificationDispatch();
+
+  const resetNotif = () => {
+    setTimeout(() => {
+      dispatch({ type: "RESET" });
+    }, 5000);
+  };
 
   const updateAnecdoteMutation = useMutation({
     mutationFn: updateAnecdote,
@@ -32,6 +40,8 @@ const App = () => {
   const handleVote = (anecdote) => {
     updateAnecdoteMutation.mutate({ ...anecdote, votes: anecdote.votes + 1 });
     console.log(anecdote);
+    dispatch({ type: "INFO", payload: "YOU HAVE VOTED" });
+    resetNotif();
   };
 
   return (
